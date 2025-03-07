@@ -6,18 +6,18 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Allow frontend requests
 
-# Load the trained model and tokenizer
-from huggingface_hub import hf_hub_download
-MODEL_PATH = hf_hub_download(repo_id="nallarahul/NewsGuard-BERT", filename="model.pkl")
-
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+# Load the trained model and tokenizer from Hugging Face Model Hub
+MODEL_NAME = "nallarahul/NewsGaurd"
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, subfolder = "final_model")
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 # Define labels
 labels = ["Fake", "Real"]
+
 @app.route('/')
 def hello_world():
     return "<p>hello world</p>"
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json

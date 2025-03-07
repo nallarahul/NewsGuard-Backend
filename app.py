@@ -8,7 +8,7 @@ CORS(app)  # Allow frontend requests
 
 # Load the trained model and tokenizer from Hugging Face Model Hub
 MODEL_NAME = "nallarahul/NewsGaurd"
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, subfolder = "final_model")
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 # Define labels

@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)  # Allow frontend requests
@@ -39,4 +40,5 @@ def predict():
     return jsonify({"prediction": predicted_label, "confidence": confidence})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get("PORT", 10000))  # Use the Render-assigned port or fallback to 10000
+    app.run(host='0.0.0.0', port=port)
